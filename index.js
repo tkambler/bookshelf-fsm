@@ -44,6 +44,7 @@ module.exports = function(bookshelf, options) {
                 });
                 var fn = self[e];
                 self[e] = function() {
+                    var args = _.toArray(arguments);
                     return new Promise(function(resolve, reject) {
                         if (self._activeTransition) return reject('Model is currently in the middle of a transition');
                         var thisTransition = _.findWhere(transitions, {
@@ -51,7 +52,7 @@ module.exports = function(bookshelf, options) {
                         });
                         self._activeTransition = thisTransition;
                         self.trigger('transitioning', thisTransition.to, thisTransition.from, thisTransition.name);
-                        fn().then(function(result) {
+                        fn.apply(self, args).then(function(result) {
                             if (!thisTransition) { // fsm-as-promised should catch this
                                 return reject('Unknown transition');
                             }
