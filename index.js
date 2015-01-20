@@ -50,6 +50,9 @@ module.exports = function(bookshelf, options) {
                         var thisTransition = _.findWhere(transitions, {
                             'from': self.get('state')
                         });
+                        if (!thisTransition) {
+                            return reject('Transition not supported');
+                        }
                         self._activeTransition = thisTransition;
                         self.trigger('transitioning', thisTransition.to, thisTransition.from, thisTransition.name);
                         fn.apply(self, args).then(function(result) {
