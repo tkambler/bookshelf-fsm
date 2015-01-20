@@ -74,6 +74,14 @@ var Car = BaseMachine.extend({
 
 var car = new Car();
 
+car.on('transitioning', function(to, from, event) {
+    console.log('car transitioning', {
+        'to': to,
+        'from': from,
+        'event': event
+    });
+});
+
 car.on('transitioned', function(to, from, event) {
     console.log('car transitioned', {
         'to': to,
