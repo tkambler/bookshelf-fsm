@@ -50,6 +50,7 @@ module.exports = function(bookshelf, options) {
                             'from': self.get('state')
                         });
                         self._activeTransition = thisTransition;
+                        self.trigger('transitioning', thisTransition.to, thisTransition.from, thisTransition.name);
                         fn().then(function(result) {
                             if (!thisTransition) { // fsm-as-promised should catch this
                                 return reject('Unknown transition');
