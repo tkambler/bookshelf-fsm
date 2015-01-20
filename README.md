@@ -73,6 +73,15 @@ var Car = BaseMachine.extend({
 });
 
 var car = new Car();
+
+car.on('transitioned', function(to, from, event) {
+    console.log('car transitioned', {
+        'to': to,
+        'from': from,
+        'event': event
+    });
+});
+
 car.start().then(function() {
 	// The state transition succeeded. The model is automatically updated with the
 	// appropriate value for `state` and saved before this link in the promise chain

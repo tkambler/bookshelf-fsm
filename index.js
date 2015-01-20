@@ -57,6 +57,7 @@ module.exports = function(bookshelf, options) {
                             self.set('state', thisTransition.to);
                             self.save().then(function() {
                                 self._activeTransition = null;
+                                self.trigger('transitioned', thisTransition.to, thisTransition.from, thisTransition.name);
                                 resolve(result);
                             }).catch(function(err) {
                                 self._activeTransition = null;
