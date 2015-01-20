@@ -1,0 +1,113 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/Users/tim/.nvm/v0.10.33/bin/node',
+1 verbose cli   '/Users/tim/.nvm/v0.10.33/bin/npm',
+1 verbose cli   'publish' ]
+2 info using npm@1.4.28
+3 info using node@v0.10.33
+4 verbose publish [ '.' ]
+5 verbose cache add [ '.', null ]
+6 verbose cache add name=undefined spec="." args=[".",null]
+7 verbose parsed url { protocol: null,
+7 verbose parsed url   slashes: null,
+7 verbose parsed url   auth: null,
+7 verbose parsed url   host: null,
+7 verbose parsed url   port: null,
+7 verbose parsed url   hostname: null,
+7 verbose parsed url   hash: null,
+7 verbose parsed url   search: null,
+7 verbose parsed url   query: null,
+7 verbose parsed url   pathname: '.',
+7 verbose parsed url   path: '.',
+7 verbose parsed url   href: '.' }
+8 silly lockFile 3a52ce78- .
+9 verbose lock . /Users/tim/.npm/3a52ce78-.lock
+10 verbose tar pack [ '/Users/tim/.npm/bookshelf-fsm/0.0.1/package.tgz', '.' ]
+11 verbose tarball /Users/tim/.npm/bookshelf-fsm/0.0.1/package.tgz
+12 verbose folder .
+13 info prepublish bookshelf-fsm@0.0.1
+14 silly lockFile 1f1177db-tar tar://.
+15 verbose lock tar://. /Users/tim/.npm/1f1177db-tar.lock
+16 silly lockFile 92cb8e39--bookshelf-fsm-0-0-1-package-tgz tar:///Users/tim/.npm/bookshelf-fsm/0.0.1/package.tgz
+17 verbose lock tar:///Users/tim/.npm/bookshelf-fsm/0.0.1/package.tgz /Users/tim/.npm/92cb8e39--bookshelf-fsm-0-0-1-package-tgz.lock
+18 silly lockFile 1f1177db-tar tar://.
+19 silly lockFile 1f1177db-tar tar://.
+20 silly lockFile 92cb8e39--bookshelf-fsm-0-0-1-package-tgz tar:///Users/tim/.npm/bookshelf-fsm/0.0.1/package.tgz
+21 silly lockFile 92cb8e39--bookshelf-fsm-0-0-1-package-tgz tar:///Users/tim/.npm/bookshelf-fsm/0.0.1/package.tgz
+22 silly lockFile 9b86c167--npm-bookshelf-fsm-0-0-1-package /Users/tim/.npm/bookshelf-fsm/0.0.1/package
+23 verbose lock /Users/tim/.npm/bookshelf-fsm/0.0.1/package /Users/tim/.npm/9b86c167--npm-bookshelf-fsm-0-0-1-package.lock
+24 silly lockFile 9b86c167--npm-bookshelf-fsm-0-0-1-package /Users/tim/.npm/bookshelf-fsm/0.0.1/package
+25 silly lockFile 9b86c167--npm-bookshelf-fsm-0-0-1-package /Users/tim/.npm/bookshelf-fsm/0.0.1/package
+26 silly lockFile 3a52ce78- .
+27 silly lockFile 3a52ce78- .
+28 silly publish { name: 'bookshelf-fsm',
+28 silly publish   version: '0.0.1',
+28 silly publish   description: 'Finite State Machine Plugin for Bookshelf.js ORM',
+28 silly publish   main: 'index.js',
+28 silly publish   scripts: { test: 'echo "Error: no test specified" && exit 1' },
+28 silly publish   repository:
+28 silly publish    { type: 'git',
+28 silly publish      url: 'https://github.com/tkambler/bookshelf-fsm.git' },
+28 silly publish   keywords: [ 'bookshelf', 'finite', 'state', 'machine', 'fsm' ],
+28 silly publish   author:
+28 silly publish    { name: 'Tim Ambler',
+28 silly publish      email: 'tkambler@gmail.com',
+28 silly publish      url: 'http://bitcubby.com' },
+28 silly publish   license: 'ISC',
+28 silly publish   bugs: { url: 'https://github.com/tkambler/bookshelf-fsm/issues' },
+28 silly publish   homepage: 'https://github.com/tkambler/bookshelf-fsm',
+28 silly publish   dependencies:
+28 silly publish    { bluebird: '^2.8.0',
+28 silly publish      'fsm-as-promised': 'git+ssh://git@github.com:tkambler/fsm-as-promised#master',
+28 silly publish      lodash: '^2.4.1' },
+28 silly publish   readme: '# bookshelf-fsm\n\nA Finite State Machine Plugin for Bookshelf.js ORM. See [fsm-as-promised](https://github.com/vstirbu/fsm-as-promised) for details regarding the underlying state machine implementation.\n\n## Getting Started\n\n```\nvar BookshelfFSM = require(\'bookshelf-fsm\');\n\n/**\n * Begin by passing your `bookshelf` instance to `BookshelfFSM`.\n * This method will return a new model from which you can then \n * extend. Any model that subsequently inherits from this model\n * will be able to take advantage of finite state machine\n * functionality.\n */\nvar BaseMachine = BookshelfFSM(bookshelf);\n\nvar Car = BaseMachine.extend({\n\n\t\'tableName\': \'cars\',\n\t\n\t\'defaults\': {\n\t\t\'state\': \'off\'\n\t},\n\t\n\t/**\n\t * If you don\'t need to perform any special setup for your\n\t * model(s), you can omit this method entirely. If you do\n\t * override `initialize`, however, be sure you maintain the\n\t * prototype chain as shown here.\n\t */\n    \'initialize\': function() {\n        Base.prototype.initialize.apply(this, arguments);\n    },\n    \n\t\'_getFSMCallbacks\': function() {\n\t\n\t\treturn {\n\t\t\t\'onstart\': function() {\n\t\t\t\treturn new Promise(function(resolve, reject) {\n\t\t\t\t\t// ...\n\t\t\t\t\treturn resolve();\n\t\t\t\t});\n\t\t\t},\n\t\t\t\'onstop\': function() {\n\t\t\t\treturn new Promise(function(resolve, reject) {\n\t\t\t\t\t// ...\n\t\t\t\t\treturn resolve();\n\t\t\t\t});\n\t\t\t}\n\t\t};\n\n\t},\n\t\n\t\'_getFSMEvents\': function() {\n\t\n\t\treturn [\n\t\t\t{\n\t\t\t\t\'name\': \'start\',\n\t\t\t\t\'from\': \'off\',\n\t\t\t\t\'to\': \'on\'\n\t\t\t},\n\t\t\t{\n\t\t\t\t\'name\': \'stop\',\n\t\t\t\t\'from\': \'on\',\n\t\t\t\t\'to\': \'off\'\n\t\t\t}\n\t\t];\n\n\t}\n\n});\n\nvar car = new Car();\n\ncar.on(\'transitioning\', function(to, from, event) {\n    console.log(\'car transitioning\', {\n        \'to\': to,\n        \'from\': from,\n        \'event\': event\n    });\n});\n\ncar.on(\'transitioned\', function(to, from, event) {\n    console.log(\'car transitioned\', {\n        \'to\': to,\n        \'from\': from,\n        \'event\': event\n    });\n});\n\ncar.start().then(function() {\n\t// The state transition succeeded. The model is automatically updated with the\n\t// appropriate value for `state` and saved before this link in the promise chain\n\t// is called.\n}).catch(function(err) {\n\t// The state transition failed. The model\'s `state` attribute was not updated.\n});\n```\n\n## Acknowledgements\n\nBookshelf-fsm is basically just intelligent superglue that binds Bookshelf to a state machine made possible by the following libraries:\n\n- [javascript-state-machine](https://github.com/jakesgordon/javascript-state-machine)\n- [fsm-as-promised](https://github.com/vstirbu/fsm-as-promised)',
+28 silly publish   readmeFilename: 'README.md',
+28 silly publish   gitHead: 'f38564ce59fb92f6454c441833ab18f38a09a640',
+28 silly publish   _id: 'bookshelf-fsm@0.0.1',
+28 silly publish   _shasum: '24585cb7c00cc980861b6670ea80007b03b990b6',
+28 silly publish   _from: '.' }
+29 verbose request where is /bookshelf-fsm
+30 verbose request registry https://registry.npmjs.org/
+31 verbose request id 5ffc42fe280ee880
+32 verbose url raw /bookshelf-fsm
+33 verbose url resolving [ 'https://registry.npmjs.org/', './bookshelf-fsm' ]
+34 verbose url resolved https://registry.npmjs.org/bookshelf-fsm
+35 verbose request where is https://registry.npmjs.org/bookshelf-fsm
+36 info trying registry request attempt 1 at 17:08:07
+37 http PUT https://registry.npmjs.org/bookshelf-fsm
+38 http 403 https://registry.npmjs.org/bookshelf-fsm
+39 verbose headers { date: 'Tue, 20 Jan 2015 23:08:08 GMT',
+39 verbose headers   server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+39 verbose headers   'content-type': 'application/json',
+39 verbose headers   'cache-control': 'max-age=60',
+39 verbose headers   'content-length': '6488',
+39 verbose headers   'accept-ranges': 'bytes',
+39 verbose headers   via: '1.1 varnish',
+39 verbose headers   'x-served-by': 'cache-iad2147-IAD',
+39 verbose headers   'x-cache': 'MISS',
+39 verbose headers   'x-cache-hits': '0',
+39 verbose headers   'x-timer': 'S1421795287.989150,VS0,VE430',
+39 verbose headers   'keep-alive': 'timeout=10, max=50',
+39 verbose headers   connection: 'Keep-Alive' }
+40 error publish Failed PUT 403
+41 error Error: forbidden cannot modify pre-existing version: 0.0.1
+41 error old={"name":"bookshelf-fsm","version":"0.0.1","description":"Finite State Machine Plugin for Bookshelf.js ORM","main":"index.js","scripts":{"test":"echo \"Error: no test specified\" && exit 1"},"repository":{"type":"git","url":"https://github.com/tkambler/bookshelf-fsm.git"},"keywords":["bookshelf","finite","state","machine","fsm"],"author":{"name":"Tim Ambler","email":"tkambler@gmail.com","url":"http://bitcubby.com"},"license":"ISC","bugs":{"url":"https://github.com/tkambler/bookshelf-fsm/issues"},"homepage":"https://github.com/tkambler/bookshelf-fsm","dependencies":{"bluebird":"^2.8.0","fsm-as-promised":"git+ssh://git@github.com:tkambler/fsm-as-promised#master","lodash":"^2.4.1"},"gitHead":"fb7836e648a04453ed018879b1426b6667623644","_id":"bookshelf-fsm@0.0.1","_shasum":"9faca30753581852f6c901e76898a6693e0a42d4","_from":".","_npmVersion":"1.4.28","_npmUser":{"name":"timambler","email":"tkambler@gmail.com"},"maintainers":[{"name":"timambler","email":"tkambler@gmail.com"}],"dist":{"shasum":"9faca30753581852f6c901e76898a6693e0a42d4","tarball":"http://registry.npmjs.org/bookshelf-fsm/-/bookshelf-fsm-0.0.1.tgz"}}
+41 error new={"name":"bookshelf-fsm","version":"0.0.1","description":"Finite State Machine Plugin for Bookshelf.js ORM","main":"index.js","scripts":{"test":"echo \"Error: no test specified\" && exit 1"},"repository":{"type":"git","url":"https://github.com/tkambler/bookshelf-fsm.git"},"keywords":["bookshelf","finite","state","machine","fsm"],"author":{"name":"Tim Ambler","email":"tkambler@gmail.com","url":"http://bitcubby.com"},"license":"ISC","bugs":{"url":"https://github.com/tkambler/bookshelf-fsm/issues"},"homepage":"https://github.com/tkambler/bookshelf-fsm","dependencies":{"bluebird":"^2.8.0","fsm-as-promised":"git+ssh://git@github.com:tkambler/fsm-as-promised#master","lodash":"^2.4.1"},"readme":"# bookshelf-fsm\u000a\u000aA Finite State Machine Plugin for Bookshelf.js ORM. See [fsm-as-promised](https://github.com/vstirbu/fsm-as-promised) for details regarding the underlying state machine implementation.\u000a\u000a## Getting Started\u000a\u000a```\u000avar BookshelfFSM = require('bookshelf-fsm');\u000a\u000a/**\u000a * Begin by passing your `bookshelf` instance to `BookshelfFSM`.\u000a * This method will return a new model from which you can then \u000a * extend. Any model that subsequently inherits from this model\u000a * will be able to take advantage of finite state machine\u000a * functionality.\u000a */\u000avar BaseMachine = BookshelfFSM(bookshelf);\u000a\u000avar Car = BaseMachine.extend({\u000a\u000a\u0009'tableName': 'cars',\u000a\u0009\u000a\u0009'defaults': {\u000a\u0009\u0009'state': 'off'\u000a\u0009},\u000a\u0009\u000a\u0009/**\u000a\u0009 * If you don't need to perform any special setup for your\u000a\u0009 * model(s), you can omit this method entirely. If you do\u000a\u0009 * override `initialize`, however, be sure you maintain the\u000a\u0009 * prototype chain as shown here.\u000a\u0009 */\u000a    'initialize': function() {\u000a        Base.prototype.initialize.apply(this, arguments);\u000a    },\u000a    \u000a\u0009'_getFSMCallbacks': function() {\u000a\u0009\u000a\u0009\u0009return {\u000a\u0009\u0009\u0009'onstart': function() {\u000a\u0009\u0009\u0009\u0009return new Promise(function(resolve, reject) {\u000a\u0009\u0009\u0009\u0009\u0009// ...\u000a\u0009\u0009\u0009\u0009\u0009return resolve();\u000a\u0009\u0009\u0009\u0009});\u000a\u0009\u0009\u0009},\u000a\u0009\u0009\u0009'onstop': function() {\u000a\u0009\u0009\u0009\u0009return new Promise(function(resolve, reject) {\u000a\u0009\u0009\u0009\u0009\u0009// ...\u000a\u0009\u0009\u0009\u0009\u0009return resolve();\u000a\u0009\u0009\u0009\u0009});\u000a\u0009\u0009\u0009}\u000a\u0009\u0009};\u000a\u000a\u0009},\u000a\u0009\u000a\u0009'_getFSMEvents': function() {\u000a\u0009\u000a\u0009\u0009return [\u000a\u0009\u0009\u0009{\u000a\u0009\u0009\u0009\u0009'name': 'start',\u000a\u0009\u0009\u0009\u0009'from': 'off',\u000a\u0009\u0009\u0009\u0009'to': 'on'\u000a\u0009\u0009\u0009},\u000a\u0009\u0009\u0009{\u000a\u0009\u0009\u0009\u0009'name': 'stop',\u000a\u0009\u0009\u0009\u0009'from': 'on',\u000a\u0009\u0009\u0009\u0009'to': 'off'\u000a\u0009\u0009\u0009}\u000a\u0009\u0009];\u000a\u000a\u0009}\u000a\u000a});\u000a\u000avar car = new Car();\u000a\u000acar.on('transitioning', function(to, from, event) {\u000a    console.log('car transitioning', {\u000a        'to': to,\u000a        'from': from,\u000a        'event': event\u000a    });\u000a});\u000a\u000acar.on('transitioned', function(to, from, event) {\u000a    console.log('car transitioned', {\u000a        'to': to,\u000a        'from': from,\u000a        'event': event\u000a    });\u000a});\u000a\u000acar.start().then(function() {\u000a\u0009// The state transition succeeded. The model is automatically updated with the\u000a\u0009// appropriate value for `state` and saved before this link in the promise chain\u000a\u0009// is called.\u000a}).catch(function(err) {\u000a\u0009// The state transition failed. The model's `state` attribute was not updated.\u000a});\u000a```\u000a\u000a## Acknowledgements\u000a\u000aBookshelf-fsm is basically just intelligent superglue that binds Bookshelf to a state machine made possible by the following libraries:\u000a\u000a- [javascript-state-machine](https://github.com/jakesgordon/javascript-state-machine)\u000a- [fsm-as-promised](https://github.com/vstirbu/fsm-as-promised)","readmeFilename":"README.md","gitHead":"f38564ce59fb92f6454c441833ab18f38a09a640","_id":"bookshelf-fsm@0.0.1","_shasum":"24585cb7c00cc980861b6670ea80007b03b990b6","_from":".","_npmVersion":"1.4.28","_npmUser":{"name":"timambler","email":"tkambler@gmail.com"},"maintainers":[{"name":"timambler","email":"tkambler@gmail.com"}],"dist":{"shasum":"24585cb7c00cc980861b6670ea80007b03b990b6","tarball":"http://registry.npmjs.org/bookshelf-fsm/-/bookshelf-fsm-0.0.1.tgz"}}: bookshelf-fsm
+41 error     at RegClient.<anonymous> (/Users/tim/.nvm/v0.10.33/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:308:14)
+41 error     at Request._callback (/Users/tim/.nvm/v0.10.33/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:246:65)
+41 error     at Request.self.callback (/Users/tim/.nvm/v0.10.33/lib/node_modules/npm/node_modules/request/request.js:236:22)
+41 error     at Request.emit (events.js:98:17)
+41 error     at Request.<anonymous> (/Users/tim/.nvm/v0.10.33/lib/node_modules/npm/node_modules/request/request.js:1142:14)
+41 error     at Request.emit (events.js:117:20)
+41 error     at IncomingMessage.<anonymous> (/Users/tim/.nvm/v0.10.33/lib/node_modules/npm/node_modules/request/request.js:1096:12)
+41 error     at IncomingMessage.emit (events.js:117:20)
+41 error     at _stream_readable.js:943:16
+41 error     at process._tickCallback (node.js:419:13)
+42 error If you need help, you may report this *entire* log,
+42 error including the npm and node versions, at:
+42 error     <http://github.com/npm/npm/issues>
+43 error System Darwin 14.0.0
+44 error command "/Users/tim/.nvm/v0.10.33/bin/node" "/Users/tim/.nvm/v0.10.33/bin/npm" "publish"
+45 error cwd /Users/tim/repos/bookshelf-fsm
+46 error node -v v0.10.33
+47 error npm -v 1.4.28
+48 verbose exit [ 1, true ]
