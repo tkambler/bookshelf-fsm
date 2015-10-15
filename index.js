@@ -47,11 +47,16 @@ module.exports = function(bookshelf, options) {
                     var args = _.toArray(arguments);
                     return new Promise(function(resolve, reject) {
                         if (self._activeTransition) return reject('Model is currently in the middle of a transition');
-                        var thisTransition = _.findWhere(transitions, {
-                            'from': self.get('state')
+                        var thisTransition = _.findWhere(transitions, function(transition) {
+                            if (_.isArray(transition.from)) {
+                              return _.contains(transition.from, self.get('state'));
+                            }
+
+                            return transition.from === self.get('state');
                         });
                         if (!thisTransition) {
-                            return reject('Transition not supported');
+                            return reject('Transition from ' + self.get('state') + ' via ' + e +
+                            ' not supported');
                         }
                         self._activeTransition = thisTransition;
                         self.trigger('transitioning', thisTransition.to, thisTransition.from, thisTransition.name);
