@@ -25,7 +25,7 @@
   "homepage": "https://github.com/tkambler/bookshelf-fsm",
   "dependencies": {
     "bluebird": "^2.8.0",
-    "fsm-as-promised": "vstirbu/fsm-as-promised#master",
+    "fsm-as-promised": "colonyamerican/fsm-as-promised#master",
     "lodash": "^2.4.1"
   }
 }
