@@ -1,5 +1,6 @@
 {
-  "name": "bookshelf-fsm",
+  "name": "@waypointhomes/bookshelf-fsm",
+  "private": true,
   "version": "0.0.3",
   "description": "Finite State Machine Plugin for Bookshelf.js ORM",
   "main": "index.js",
